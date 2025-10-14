@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ name }}的观影记录</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
 </head>
 <body>
-    <h2>{{ name }}的观影记录</h2>
+    <h2><img alt="Avatar" class="avatar" src="{{ url_for('static', filename='images/avatar.png') }}">{{ name }}的观影记录</h2>
     <p>共计{{ movies|length }}条</p>
-    <ul>
+    <ul class="movie-list">
         {% for movie in movies %}
         <li>{{ movie.title }} - {{ movie.year }}</li>
         {% endfor %}
     </ul>
+    <img alt="Walking Totoro" class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}">
     <footer>
         <small>&copy; 2025 <a href="https://github.com/soraoo/watchlist">soraoo</a></small>
     </footer>
