@@ -72,8 +72,18 @@ def forge():
     click.echo("生成完毕。")
 
 
+@app.context_processor
+def inject_user():
+    user = db.session.execute(select(User)).scalar()
+    return dict(user=user)
+
+
 @app.route("/")
 def index():
-    user = db.session.execute(select(User)).scalar()
     movies = db.session.execute(select(Movie)).scalars().all()
-    return render_template("index.html", user=user, movies=movies)
+    return render_template("index.html", movies=movies)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
